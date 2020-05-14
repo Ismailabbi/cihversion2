@@ -1,0 +1,257 @@
+
+
+
+  <div class="row">
+    <button class="btn btn-sm btn-primary float" (click)="infoModal.show()" type="submit"><i class="fa icon-magnifier  "></i> Filtrage</button>
+  </div>
+  <div class="row">
+ <div class=" ">
+     <table class="l-table table table-striped">
+       <thead>
+        <tr>
+             
+             
+          <th scope="col">   ID   	    </th>
+         
+          <th scope="col">Num Event</th>
+          <th scope="col">Nom Event	</th>
+          
+         
+          <th scope="col">    RateNet      </th>
+        </tr>
+       </thead>
+       <tbody>
+       
+        <tr *ngFor="let country of items |eventname:nomeventselected|eventnum:numeventselected|id:idselected|eventfamille:familleselected|eventcategorie:categorieselected|eventprocessus:processusselected|paginate: { itemsPerPage: 10, currentPage: p }" >
+            
+          <td>
+              {{ country.IDService }}
+          </td>
+          <td>
+
+              {{ country.NumEvent }}           
+          <td>
+
+              {{ country.NomEvent }}             
+          <td>
+
+              {{ country.RateNet }}
+          </td>
+         
+        </tr>
+     
+       </tbody>
+     </table>
+   </div>
+  </div>
+
+  <div class="pgsize"> <pagination-controls (pageChange)="p = $event"></pagination-controls></div>
+ 
+
+  <div bsModal #infoModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-info" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Modal title</h4>
+          <button type="button" class="close" (click)="infoModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         
+        
+    
+       
+          <div class="row">
+           
+  
+            <div class="col-md-4" >
+              <div class="ng-autocomplete">
+              <th>
+                Processus
+                <ng-autocomplete 
+                placeHolder="All"
+                [data]=this.elements.get_Processus()
+                [searchKeyword]="'Processus'"
+                (selected)='selectprocessus($event)'
+                (inputChanged)='onChangeSearch($event)'
+                (inputFocused)='onFocused($event)'
+                [itemTemplate]="itemTemplate"
+                [notFoundTemplate]="notFoundTemplate">                                 
+              </ng-autocomplete>
+               
+              <ng-template #itemTemplate let-item>
+              <a [innerHTML]="item.Processus"></a>
+              </ng-template>
+               
+              <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="notFound"></div>
+              </ng-template>
+          
+          </th>
+          </div>
+            </div>
+            <div class="col-md-4 ">
+              <div class="ng-autocomplete">
+                <th>
+                    Categorie
+                  <ng-autocomplete 
+                  placeHolder="All"
+                  [data]=this.elements.get_Categorie()
+                  [searchKeyword]="'Categorie'"
+                  (selected)='categorieselect($event)'
+                  (inputChanged)='b($event)'
+                  (inputFocused)='c($event)'
+                  [itemTemplate]="itemTemplatee"
+                  [notFoundTemplate]="notFoundTemplatee">                                 
+                </ng-autocomplete>
+                 
+                <ng-template #itemTemplatee let-iteme>
+                <a [innerHTML]="iteme.Categorie"></a>
+                </ng-template>
+                 
+                <ng-template #notFoundTemplatee let-notFound>
+                <div [innerHTML]="notFound"></div>
+                </ng-template>
+            
+            </th>
+            </div>
+              </div>
+              <div class="col-md-4 ">
+                <div class="ng-autocomplete">
+                  <th>
+                      Famille
+                    <ng-autocomplete 
+                    placeHolder="All"
+                    [data]=this.elements.get_Famille()
+                    [searchKeyword]="'Famille'"
+                    (selected)='selectedfamille($event)'
+                    (inputChanged)='bb($event)'
+                    (inputFocused)='cb($event)'
+                    [itemTemplate]="itemTemplateee"
+                    [notFoundTemplate]="notFoundTemplateee">                                 
+                  </ng-autocomplete>
+                   
+                  <ng-template #itemTemplateee let-iteme>
+                  <a [innerHTML]="iteme.Famille"></a>
+                  </ng-template>
+                   
+                  <ng-template #notFoundTemplateee let-notFound>
+                  <div [innerHTML]="notFound"></div>
+                  </ng-template>
+              
+              </th>
+              
+                </div>
+                
+          </div>
+       </div>
+
+
+
+
+
+
+
+
+
+          <accordion>
+            <accordion-group heading="Reference">
+     
+          <div class="row">
+            <div class="col-md-4">
+                <th>
+
+           
+            
+                    Nom Event :
+                    <ng-autocomplete 
+                    [data]="nameevents"
+                    placeHolder="All"
+           
+                    [searchKeyword]="'NomEvent'"
+                    (selected)='selectEvent($event)'
+                    (inputChanged)='onChangeSearch($event)'
+                    (inputFocused)='onFocused($event)'
+                    [itemTemplate]="data"
+                    [notFoundTemplate]="notFoundTemplatez">                                 
+                  </ng-autocomplete>
+                   
+                  <ng-template #data let-item>
+                      
+                  <a [innerHTML]="item.NomEvent"></a>
+                  </ng-template>
+                   
+                  <ng-template #notFoundTemplatez let-notFound>
+                  <div [innerHTML]="notFound"></div>
+                  </ng-template>
+            
+            </th>
+            </div>
+          
+           
+       
+            <div class="col-md-4">
+              <th>
+                Num Event :
+                <ng-autocomplete 
+                [data]="eventNumlist"
+                placeHolder="All"
+                [searchKeyword]="'NumEvent'"
+                (selected)='selectEventnum($event)'
+                (inputChanged)='onChangeSearch($event)'
+                (inputFocused)='onFocused($event)'
+                [itemTemplate]="itemTemplatenum"
+                [notFoundTemplate]="notFoundTemplate">                                 
+              </ng-autocomplete>
+               
+              <ng-template #itemTemplatenum let-item>
+                  
+              <a [innerHTML]="item.NumEvent"></a>
+              </ng-template>
+               
+              <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="notFound"></div>
+              </ng-template>
+
+
+        </th>
+              </div>
+     
+        
+              <div class="col-md-4">
+                  <th>
+                      ID:
+                      <ng-autocomplete 
+     
+      [data]="idlist"
+                      placeHolder="All"
+                      [searchKeyword]="'IDService'"
+                      (selected)='selectEventId($event)'
+                      (inputChanged)='onChangeSearch($event)'
+                      (inputFocused)='onFocused($event)'
+                      [itemTemplate]="itemTemplateId"
+                      [notFoundTemplate]="notFoundTemplate">                                 
+                    </ng-autocomplete>
+                     
+                    <ng-template #itemTemplateId let-item>
+                        
+                    <a [innerHTML]="item.IDService"></a>
+                    </ng-template>
+                     
+                    <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                    </ng-template>
+        
+                  </th>
+                </div>
+              
+            </div>
+          </accordion-group>
+          </accordion>
+
+        </div>
+        
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>

@@ -1,0 +1,70 @@
+
+
+<div class="row">
+  <button class="btn btn-sm btn-primary float" (click)="infoModal.show()" type="submit"><i class="fa fa-dot-circle-o "></i> Submit</button>
+</div>
+<app-linechart [lineChartData]=lineChartData></app-linechart>
+<div class="row t">
+    <div class="col-md-2">
+        <button type="button" (click)='Classification()' class="btn btn-info">Classification</button>
+      </div>
+<div class="col-md-2">
+    <button type="button" (click)='acceptancesurf()' class="btn btn-info">Acceptance</button>
+</div>
+<div class="col-md-2">
+    <button type="button" (click)='origin()' class="btn btn-info">Origine</button>
+</div>
+<div class="col-md-2">
+  <button type="button" (click)='Famille()' class="btn btn-info">Famille</button>
+</div>
+<div class="col-md-2">
+<button type="button" (click)='Proccesus()' class="btn btn-info">Processus</button>
+</div>
+<div class="col-md-2">
+<button type="button" (click)='Categorie()' class="btn btn-info">Categorie</button>
+</div>
+</div>
+
+
+
+
+
+<div bsModal #infoModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-info" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Modal title</h4>
+        <button type="button" class="close" (click)="infoModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+        <div class="col-md-10"> <th>
+          Année
+             <ng-autocomplete 
+             [data]="years"
+             placeHolder="All"
+             (selected)='selectedannee($event)'
+            
+             [itemTemplate]="tempane"
+             [notFoundTemplate]="notFoundTemplate">                                 
+           </ng-autocomplete>
+            
+           <ng-template #tempane let-item>
+               
+           <a [innerHTML]="item"></a>
+           </ng-template>
+            
+           <ng-template #notFoundTemplate let-notFound>
+           <div [innerHTML]="notFound"></div>
+           </ng-template>
+        
+        </th></div>
+      <button class="btn btn-block btn-primary" type="button" (click)='chercher()'>Chercher()</button>
+        </div>
+
+      </div>
+      
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->

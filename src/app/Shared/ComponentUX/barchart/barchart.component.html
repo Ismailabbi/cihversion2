@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="card-header">
+      Bar Chart
+      <div class="card-header-actions">
+        <a href="http://www.chartjs.org">
+          <small class="text-muted">docs</small>
+        </a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div *ngIf='asyndata'>
+      <div class="chart-wrapper">
+        <canvas baseChart class="chart"
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [legend]="barChartLegend"
+        [chartType]="barChartType"
+    ></canvas>
+      </div>
+      </div>
+    </div>
+  </div>

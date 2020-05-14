@@ -1,0 +1,145 @@
+
+
+
+
+  <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Detail</h4>
+          <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         
+           
+           
+                
+
+
+                    <table class="table table-bordered table-striped table-sm">
+                      <thead>
+                        <tr  class="color">
+                          <th>Propertie</th>
+                          <th>Value</th>
+                          <th>Propertie</th>
+                          <th>Value</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                           <b> AactivityICA</b>
+                          </td>
+                          <td>{{Facture?.AactivityICA}}</td>
+                          <td> <b>Acceptance</b></td>
+                        
+                            <td>{{Facture?.Acceptance}}</td>
+                          
+                        </tr>
+                        <tr>
+                          <td>
+                           <b> BillableICA</b>
+                          </td>
+                          <td> {{Facture?.BillableICA}}</td>
+                          <td> <b>BillingCycleDate</b></td>
+                        
+                            <td>{{Facture?.BillingCycleDate}}</td>
+                          
+                        </tr>
+                        <tr>
+                          <td>
+                            <b>Canal</b>
+                          </td>
+                          <td>{{Facture?.Canal}}</td>
+                          <td><b>Charge</b></td>
+                        
+                            <td>{{Facture?.Charge}}</td>
+                          
+                        </tr>
+                        <tr>
+                          <td>
+                           <b>Classification</b> 
+                          </td>
+                          <td>{{Facture?.Classification}}</td>
+                          <td><b>CollectionMethod</b></td>
+                        
+                            <td>{{Facture?.CollectionMethod}}</td>
+                          
+                        </tr>
+                        <tr>
+                          <td>
+                           <b>DocumentType</b> 
+                          </td>
+                          <td>{{Facture?.DocumentType}}</td>
+                          <td> <b>EventDescription</b></td>
+                        
+                            <td>{{Facture?.EventDescription}}</td>
+                          
+                        </tr>
+                         <tr>
+                          <td>
+                           <b>EventID</b> 
+                          </td>
+                          <td>{{Facture?.EventID}}</td>
+                          <td><b>InvoiceICA</b></td>
+                        
+                            <td>{{Facture?.InvoiceICA}}</td>
+                          
+                        </tr>
+                        <tr>
+                          <td>
+                         <b>EventID</b>   
+                          </td>
+                          <td>{{Facture?.EventID}}</td>
+                          <td><b>InvoiceICA</b></td>
+                        
+                            <td>{{Facture?.InvoiceICA}}</td>
+                          
+                        </tr>
+                        <tr>
+                          <td>
+                          <b>InvoiceNumber</b>  
+                          </td>
+                          <td>{{Facture?.InvoiceNumber}}</td>
+                          <td><b>Origine</b></td>
+                        
+                            <td>{{Facture?.Origine}}</td>
+                          
+                        </tr>
+                        <tr>
+                          <td>
+                           <b>QuantityAmount</b> 
+                          </td>
+                          <td>{{Facture?.QuantityAmount}}</td>
+                          <td><b>Rate</b></td>
+                        
+                            <td>{{Facture?.Rate}}</td>
+                          
+                        </tr>
+                        <tr>
+                          <td>
+                          <b>ServiceCodeDescription</b>  
+                          </td>
+                          <td>{{Facture?.ServiceCodeDescription}}</td>
+                          <td><b></b>TotalCharge</td>
+                        
+                            <td>{{Facture?.TotalCharge}}</td>
+                          
+                        </tr>
+                      </tbody>
+                    </table>
+                   
+              
+    
+      
+      
+      
+          
+         
+        </div>
+       
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>

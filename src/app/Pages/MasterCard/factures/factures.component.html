@@ -1,0 +1,405 @@
+<div class="row">
+ <div class="col-6 col-lg-6">
+  <app-widget
+  [Class1]="['fa','icon-folder','bg-primary','p-4','font-2xl','mr-3','float-left']"
+  [Class2]=class2
+  [Class3]=class3
+    [Chiffre]=this.filtrageservices.nombrefacture
+    [Text]="'Nombre_de_frais'"
+  >
+
+  </app-widget>
+</div>
+<!--/.col-->
+<div class="col-6 col-lg-6">
+  <app-widget
+  [Class1]=class11
+  [Class2]=class2
+  [Class3]=class3
+ [Chiffre]=this.filtrageservices.montanttotal
+  [Text]="'Montant total'"
+  >
+
+  </app-widget>
+</div>
+</div>
+
+
+
+ 
+
+  <div class="row">
+    <div class="">
+      <table class="l-table table table-striped border-top-0">
+        <thead>
+          <tr>
+            
+            <th >SERVICE </th>
+            <th scope="col">EVENT DESCRIPTION</th>
+            <th scope="col">DATE</th>
+            <th scope="col">MONTANT</th>
+            <th scope="col">ACCCEPTANCE</th>
+            <th scope="col"> ORIGINE</th>
+           <th> <button class="btn btn-sm btn-primary" (click)="infoModal.show()" type="submit"><i class="fa icon-magnifier"></i> Filtrage</button> </th>
+
+         
+        </tr> 
+        </thead>
+        <tbody>
+        
+          <tr #myVar *ngFor="let facture of(factures |servicecode:serviceselected | pipedate:mois |eventdescription:eventselected|acceptance:acceptanceselected|canal:canalselected|orginepipe:origineselected|datemois:Annee|Famille:familleselected|categorie:categorieselected|processusmaster:processusselected| paginate: { itemsPerPage: 10, currentPage: p }) " >
+            <td>
+             
+              {{ facture.ServiceCodeDescription }}&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;&shy;
+            </td>
+            <td>{{ facture.EventDescription  }}</td>
+            <td>{{ facture.BillingCycleDate  }}</td>
+            <td>{{ facture.TotalCharge  }}</td>
+            <td>{{facture.Acceptance}}</td>
+            <td>{{facture.Origine}}</td>
+            <td>
+              <button type="button" (click)="openModal(facture)" class="btn btn-warning">Detail
+
+              </button>
+
+            </td>
+          </tr>
+         
+        </tbody>
+      </table>
+     <div class="pgsize"> <pagination-controls (pageChange)="p = $event"></pagination-controls></div>
+  
+    </div>
+   </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <app-modaltable  [Facture]=facture [change]=change></app-modaltable>
+  <div bsModal #infoModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-info" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Filtrage</h4>
+          <button type="button" class="close" (click)="infoModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        
+          <accordion>
+            <accordion-group heading="Reference">
+              <div class="row">
+              <div class="col-md-6" >
+                <th>
+                SERVICE :
+                <div class="ng-autocomplete">
+                <ng-autocomplete 
+                [data]="this.elements.get_services_descrptions()"
+                placeHolder="All"
+                [searchKeyword]="'ServiceCodeDescription'"
+                (selected)='selectcode($event)'
+               
+                [itemTemplate]="itemTemplatecode"
+                [notFoundTemplate]="notFoundTemplate">                                 
+                </ng-autocomplete>
+                </div>
+                <ng-template #itemTemplatecode let-item>
+                  
+                <a [innerHTML]="item.ServiceCodeDescription"></a>
+                </ng-template>
+                
+                <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+                </ng-template>
+                          
+                        </th>
+                        </div>
+
+                        <div class="col-md-6">
+                          <th>	
+                            EVENT  :
+                            <div class="ng-autocomplete">
+                            <ng-autocomplete 
+                            [data]="this.elements.get_event_description()"
+                            placeHolder="All"
+                        
+                            [searchKeyword]="'EventDescription'"
+                            (selected)='selectevent($event)'
+                   
+                            [itemTemplate]="itemTemplatevent"
+                            [notFoundTemplate]="notFoundTemplate">                                 
+                          </ng-autocomplete>
+                          </div>
+                           
+                          <ng-template #itemTemplatevent let-item>
+                              
+                          <a [innerHTML]="item.EventDescription"></a>
+                          </ng-template>
+                           
+                          <ng-template #notFoundTemplate let-notFound>
+                          <div [innerHTML]="notFound"></div>
+                          </ng-template>
+                  
+                  
+                  
+                          </th>
+                        </div>
+</div>
+            </accordion-group>
+            <accordion-group heading="Date">
+            <div class="row">
+              <div class="col-md-6"> 
+                <th>
+                Année
+                <div class="ng-autocomplete">
+                   <ng-autocomplete 
+                   [data]="years"
+                   placeHolder="All"
+                   (selected)='selectedannee($event)'
+                   [itemTemplate]="tempane"
+                   (inputChanged)='onChangeSearch($event)'
+
+                   [notFoundTemplate]="notFoundTemplate">                                 
+                 </ng-autocomplete>
+                  </div>
+                 <ng-template #tempane let-item>
+                     
+                 <a [innerHTML]="item"></a>
+                 </ng-template>
+                  
+                 <ng-template #notFoundTemplate let-notFound>
+                 <div [innerHTML]="notFound"></div>
+                 </ng-template>
+       
+             </th></div> 
+              <div class="col-md-6">
+                <th>
+                    Mois:
+                   
+                    <div class="ng-autocomplete">
+                    <ng-autocomplete 
+                    [data]="this.elements.get_mois()"
+                    placeHolder="All"
+                
+                    (selected)='selectdate($event)'
+                    (inputChanged)='onChangeSearch($event)'
+                    (inputFocused)='onFocused($event)'
+                    [itemTemplate]="itemTemplatdate"
+                    [notFoundTemplate]="notFoundTemplate">                                 
+                  </ng-autocomplete>
+          
+                   </div>
+                  <ng-template #itemTemplatdate let-item>
+                      
+                  <a [innerHTML]="item"></a>
+                  </ng-template>
+                   
+                  <ng-template #notFoundTemplate let-notFound>
+                  <div [innerHTML]="notFound"></div>
+                  </ng-template>
+                </th>
+               
+              </div>
+              </div>
+            </accordion-group>
+            <accordion-group heading="Classification">
+              <div class="row">
+          
+                <div class="col-md-4"> <th>
+                  Acceptance:
+                  <ng-autocomplete 
+                  [data]="this.elements.getAcceptance()"
+                  placeHolder="All"
+                  [searchKeyword]="'Acceptance'"
+                  (selected)='selectEventa($event)'
+                 
+                  [itemTemplate]="itemTemplatea"
+                  [notFoundTemplate]="notFoundTemplate">                                 
+                </ng-autocomplete>
+                 
+                <ng-template #itemTemplatea let-item>
+                    
+                <a [innerHTML]="item.Acceptance"></a>
+                </ng-template>
+                 
+                <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+                </ng-template>
+      
+            </th></div>
+                <div class="col-md-4">
+      
+           
+                  <th>
+                    Canal:
+                    <ng-autocomplete 
+                    [data]="this.elements.getCanal()"
+                    placeHolder="All"
+      
+                    [searchKeyword]="'Canal'"
+                    (selected)='selectEventca($event)'
+                   
+                    [itemTemplate]="itemTemplateca"
+                    [notFoundTemplate]="notFoundTemplate">                                 
+                  </ng-autocomplete>
+                   
+                  <ng-template #itemTemplateca let-item>
+                      
+                  <a [innerHTML]="item.Canal"></a>
+                  </ng-template>
+                   
+                  <ng-template #notFoundTemplate let-notFound>
+                  <div [innerHTML]="notFound"></div>
+                  </ng-template>
+                  
+              </th>
+      
+                </div>
+                <div class="col-md-4">
+                  <th>
+                  Origin
+                  <ng-autocomplete 
+                  [data]="this.elements.getorigine()"
+                  placeHolder="All"
+      
+                  [searchKeyword]="'Origine'"
+                  (selected)='selectEventco($event)'
+                 
+                  [itemTemplate]="itemTemplateoo"
+                  [notFoundTemplate]="notFoundTemplate">                                 
+                </ng-autocomplete>
+                 
+                <ng-template #itemTemplateoo let-item>
+                    
+                <a [innerHTML]="item.Origine"></a>
+                </ng-template>
+                 
+                <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+                </ng-template>
+      
+      </th>
+      
+                </div>
+            
+              </div>
+              
+      
+              <div class="row">
+      
+      
+                <div class="col-md-4">
+                <th>
+                  Processus
+                  <ng-autocomplete 
+                  class="ng-autocomplete"
+                  [data]="this.elements.get_Processus()"
+                  [searchKeyword]="'Processus'"
+                  (selected)='selectprocessus($event)'
+                  placeHolder="All"
+      
+                  [itemTemplate]="itemTemplate"
+                  [notFoundTemplate]="notFoundTemplate">                                 
+                </ng-autocomplete>
+                 
+                <ng-template #itemTemplate let-item>
+                <a [innerHTML]="item.Processus"></a>
+                </ng-template>
+                 
+                <ng-template #notFoundTemplate let-notFound>
+                <div [innerHTML]="notFound"></div>
+                </ng-template>
+                
+                </th>
+                
+                </div>
+                <div class="col-md-4">
+                  <th>
+                      Categorie
+                    <ng-autocomplete 
+                    placeHolder="All"
+                    [data]="this.elements.get_Categorie()"
+                    [searchKeyword]="'Categorie'"
+                    (selected)='categorieselect($event)'
+                  
+                    [itemTemplate]="itemTemplatee"
+                    [notFoundTemplate]="notFoundTemplatee">                                 
+                  </ng-autocomplete>
+                   
+                  <ng-template #itemTemplatee let-iteme>
+                  <a [innerHTML]="iteme.Categorie"></a>
+                  </ng-template>
+                   
+                  <ng-template #notFoundTemplatee let-notFound>
+                  <div [innerHTML]="notFound"></div>
+                  </ng-template>
+                
+                </th>
+                
+                </div>
+                <div class="col-md-4">
+                    <th>
+                        Famille
+                      <ng-autocomplete 
+                      placeHolder="All"
+                      [data]="this.elements.get_Famille()"
+                      [searchKeyword]="'Famille'"
+                      (selected)='selectedfamille($event)'
+                      
+                      [itemTemplate]="itemTemplateee"
+                      [notFoundTemplate]="notFoundTemplateee">                                 
+                    </ng-autocomplete>
+                     
+                    <ng-template #itemTemplateee let-iteme>
+                    <a [innerHTML]="iteme.Famille"></a>
+                    </ng-template>
+                     
+                    <ng-template #notFoundTemplateee let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                    </ng-template>
+                
+                </th>
+                
+                  </div>
+                </div>
+            </accordion-group>
+          
+          </accordion> 
+        
+        
+        
+        
+        
+        
+      
+    
+     
+         
+
+
+       
+          
+
+        </div>
+        
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>

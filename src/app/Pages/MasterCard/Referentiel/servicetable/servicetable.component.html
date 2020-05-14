@@ -1,0 +1,274 @@
+
+
+ <div class="row">
+
+   <button class="btn btn-sm btn-primary float" (click)="infoModal.show()" type="submit"><i class="fa icon-magnifier "></i> Filtrage</button>
+ 
+ </div>
+ <div class="row">
+  <div class="">
+    <table class="l-table table table-striped">
+      <thead>
+        <tr>
+          <th > ID</th>
+          <th scope="col">Service Name</th>
+          <th scope="col">Type des service</th>
+          <th scope="col">Classification</th>
+          <th>Acceptance</th>
+          <th>Canal</th>
+          <th>Origine</th>
+          <th>Rate</th>
+          <th>TypeRate</th>
+        </tr>  
+      </thead>
+      <tbody>
+      
+          <tr *ngFor="let country of Listeservices|sercivnams:servicenameselected |acceptanceservice:acceptanceselected |canalservice:canalselected|originservice:origineselected|typeservice:typeserivceselected|classification:classificationselected| paginate: { itemsPerPage: 10, currentPage: p }">
+      
+ 
+       
+        
+            <td>{{country.ServiceID}}</td>
+            <td>{{country.ServiceNAME}}</td>
+            <td>{{country.Typedeservice}}</td>
+            <td>{{country.Classification}}</td>
+            <td>{{country.Acceptance}}</td>
+            <td>{{country.Canal}}</td>
+            <td>{{country.Origine}}</td>
+            <td>{{country.Rate}}</td>
+            <td>{{country.TypeRate}}</td>
+            
+            
+
+            
+            
+
+          
+         
+             
+        
+        </tr>
+       
+      </tbody>
+    </table>
+    <div class="pgsize"> <pagination-controls (pageChange)="p = $event"></pagination-controls></div>
+
+  </div>
+ </div>
+
+
+
+
+
+
+
+
+
+  <div bsModal #infoModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-info" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Modal title</h4>
+          <button type="button" class="close" (click)="infoModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         
+        
+    
+       
+      <div class="row">
+     
+
+   
+
+        <div class="col-md-4"> <th>
+          Acceptance:
+          <ng-autocomplete 
+          [data]="this.elements.getAcceptance()"
+          placeHolder="All"
+          [searchKeyword]="'Acceptance'"
+          (selected)='selectEventa($event)'
+         
+          [itemTemplate]="itemTemplatea"
+          [notFoundTemplate]="notFoundTemplate">                                 
+        </ng-autocomplete>
+         
+        <ng-template #itemTemplatea let-item>
+            
+        <a [innerHTML]="item.Acceptance"></a>
+        </ng-template>
+         
+        <ng-template #notFoundTemplate let-notFound>
+        <div [innerHTML]="notFound"></div>
+        </ng-template>
+
+    </th></div>
+      
+    <div class="col-md-4">
+
+     
+      <th>
+        Canal:
+        <ng-autocomplete 
+        [data]="this.elements.getCanal()"
+        placeHolder="All"
+
+        [searchKeyword]="'Canal'"
+        (selected)='selectEventca($event)'
+       
+        [itemTemplate]="itemTemplateca"
+        [notFoundTemplate]="notFoundTemplate">                                 
+      </ng-autocomplete>
+       
+      <ng-template #itemTemplateca let-item>
+          
+      <a [innerHTML]="item.Canal"></a>
+      </ng-template>
+       
+      <ng-template #notFoundTemplate let-notFound>
+      <div [innerHTML]="notFound"></div>
+      </ng-template>
+      
+  </th>
+
+    </div>
+    <div class="col-md-4">
+      <th>
+      Origin
+      <ng-autocomplete 
+      [data]="this.elements.getorigine()"
+      placeHolder="All"
+
+      [searchKeyword]="'Origine'"
+      (selected)='selectEventco($event)'
+     
+      [itemTemplate]="itemTemplateoo"
+      [notFoundTemplate]="notFoundTemplate">                                 
+    </ng-autocomplete>
+     
+    <ng-template #itemTemplateoo let-item>
+        
+    <a [innerHTML]="item.Origine"></a>
+    </ng-template>
+     
+    <ng-template #notFoundTemplate let-notFound>
+    <div [innerHTML]="notFound"></div>
+    </ng-template>
+
+</th>
+
+    </div>
+
+      
+
+      </div>
+        
+         
+
+      <div class="row">
+     
+
+   
+
+        <div class="col-md-4"> <th>
+         Service name  
+          <ng-autocomplete 
+          [data]="listeserviceD"
+          placeHolder="All"
+          [searchKeyword]="'ServiceNAME'"
+          (selected)='selectservicename($event)'
+         
+          [itemTemplate]="temp"
+          [notFoundTemplate]="notFoundTemplate">                                 
+        </ng-autocomplete>
+         
+        <ng-template #temp let-item>
+            
+        <a [innerHTML]="item.ServiceNAME"></a>
+        </ng-template>
+         
+        <ng-template #notFoundTemplate let-notFound>
+        <div [innerHTML]="notFound"></div>
+        </ng-template>
+
+    </th></div>
+      
+    <div class="col-md-4"> <th>
+     Type de service  
+       <ng-autocomplete 
+       [data]="listetypesercive"
+       placeHolder="All"
+       [searchKeyword]="'Typedeservice'"
+       (selected)='selecttypeservice($event)'
+      
+       [itemTemplate]="itemTemplateab"
+       [notFoundTemplate]="notFoundTemplate">                                 
+     </ng-autocomplete>
+      
+     <ng-template #itemTemplateab let-item>
+         
+     <a [innerHTML]="item.Typedeservice"></a>
+     </ng-template>
+      
+     <ng-template #notFoundTemplate let-notFound>
+     <div [innerHTML]="notFound"></div>
+     </ng-template>
+
+ </th></div>
+   
+ <div class="col-md-4">
+
+
+
+
+
+    <th>
+      Classification:
+      <ng-autocomplete 
+      [data]=this.elements.getclassfication()
+       placeHolder="All"
+      [searchKeyword]="'Classification'"
+      (selected)='selectclassification($event)'
+      (inputChanged)='onChangeSearch($event)'
+      (inputFocused)='onFocused($event)'
+      [itemTemplate]="itemTemplatec"
+      [notFoundTemplate]="notFoundTemplate">                                 
+    </ng-autocomplete>
+     
+    <ng-template #itemTemplatec let-item>
+        
+    <a [innerHTML]="item.Classification"></a>
+    </ng-template>
+     
+    <ng-template #notFoundTemplate let-notFound>
+    <div [innerHTML]="notFound"></div>
+    </ng-template>
+
+  </th>
+
+  </div>
+
+
+      
+
+      </div>
+        
+       
+
+     
+          
+          
+
+        </div>
+        
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>
+
+
+
+
+
+ 

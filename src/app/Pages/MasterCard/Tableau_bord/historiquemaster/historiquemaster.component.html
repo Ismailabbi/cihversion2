@@ -1,0 +1,14 @@
+<app-barchart [barChartData]=barChartData  [barChartLabels]=barChartLabels></app-barchart>
+
+<app-modalfiltre-historique [Data]=this.Data [key]=key (nameEvent)="nameEventHander($event)"></app-modalfiltre-historique>
+<div class="row">
+    <button type="button" (click)="Classification()" class="btn btn-info s">Classification </button>
+    <button type="button" (click)='Origine()' class="btn btn-info s">Origine  </button>
+    <button type="button" (click)='Canal()' class="btn btn-info s">Canal   </button>
+    <button type="button"(click)='Acceptance()' class="btn btn-info s">Acceptance    </button>
+    <button type="button"(click)='Categorie()' class="btn btn-info s">Categorie    </button>
+    <button type="button"(click)='Famille()' class="btn btn-info s">Famille    </button>
+    <button type="button"(click)='Processus()' class="btn btn-info s">  Processus </button>
+  
+  
+  </div>

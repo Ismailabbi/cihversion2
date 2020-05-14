@@ -1,0 +1,90 @@
+
+
+<div bsModal   #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-info" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Modal title</h4>
+          <button type="button" class="close" (click)="infoModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+          <div class="col-md-4"> <th>
+            De
+               <ng-autocomplete 
+               [data]="years"
+               placeHolder="All"
+               (selected)='selectedannee($event)'
+              
+               [itemTemplate]="tempane1"
+               [notFoundTemplate]="notFoundTemplate">                                 
+             </ng-autocomplete>
+              
+             <ng-template #tempane1 let-item>
+                 
+             <a [innerHTML]="item"></a>
+             </ng-template>
+              
+             <ng-template #notFoundTemplate let-notFound>
+             <div [innerHTML]="notFound"></div>
+             </ng-template>
+          
+          </th></div>
+
+          <div class="col-md-4"> <th>
+            A
+               <ng-autocomplete 
+               [data]="years"
+               placeHolder="All"
+               (selected)='selectedannee2($event)'
+              
+               [itemTemplate]="tempane2"
+               [notFoundTemplate]="notFoundTemplate">                                 
+             </ng-autocomplete>
+              
+             <ng-template #tempane2 let-item>
+                 
+             <a [innerHTML]="item"></a>
+             </ng-template>
+              
+             <ng-template #notFoundTemplate let-notFound>
+             <div [innerHTML]="notFound"></div>
+             </ng-template>
+          
+          </th></div>
+
+
+          <div class="col-md-4"> <th>
+            {{key}}:
+            <ng-autocomplete 
+            [data]="data"
+            placeHolder="All"
+            initialValue="All"
+
+            (selected)='selectcritere($event)'
+           
+            [itemTemplate]="itemTemplatea5"
+            [notFoundTemplate]="notFoundTemplate">                                 
+          </ng-autocomplete>
+           
+          <ng-template #itemTemplatea5 let-item>
+              
+          <a [innerHTML]=item></a>
+          </ng-template>
+           
+          <ng-template #notFoundTemplate let-notFound>
+          <div [innerHTML]="notFound"></div>
+          </ng-template>
+
+      </th></div>
+          
+          </div>
+        <button class="btn btn-block btn-primary" type="button" (click)='chercher()'>Chercher()</button>
+          </div>
+  
+        </div>
+        
+      </div><!-- /.modal-content -->
+    </div>
